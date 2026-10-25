@@ -1,0 +1,24 @@
+[Unit]
+Description=agmux - Remote Antigravity Telegram Agent
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=javad
+Group=javad
+WorkingDirectory=/home/javad/projects/agmux
+EnvironmentFile=/home/javad/projects/agmux/.env
+ExecStart=/home/javad/projects/agmux/.venv/bin/python /home/javad/projects/agmux/main.py
+Restart=always
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+
+# Ensure Git SSH and user home permissions work properly
+Environment="HOME=/home/javad"
+Environment="PATH=/home/javad/.local/bin:/usr/local/bin:/usr/bin:/bin"
+
+[Install]
+WantedBy=multi-user.target
+
