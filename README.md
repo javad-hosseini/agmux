@@ -221,3 +221,24 @@ To run `agmux` as an automated, auto-restarting background daemon:
 ## 📄 License
 
 This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
+
+3. Monitor live service logs:
+   ```bash
+   sudo journalctl -u agmux.service -f
+   ```
+
+---
+
+## 🔒 Security & Privacy
+
+- **Zero Inbound Attack Surface:** Uses long-polling exclusively. No HTTP ports or webhook URLs are opened on your server.
+- **Single-User Middleware:** Any message or callback from an unauthorized Telegram user ID is silently dropped before reaching the application layer.
+- **Strict Mode Separation:** New sessions default to read-only `PLAN` mode. Antigravity cannot modify source files or execute mutating commands until explicitly approved via Telegram.
+- **Automatic Secret Redaction:** Files matching sensitive patterns (`.env*`, `*.pem`, `*.key`, `id_rsa*`, `credentials.json`) are blocked from delivery. Text files are scanned with regexes to scrub API keys, private keys, and database credentials before transmission.
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
+
